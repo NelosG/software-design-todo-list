@@ -1,23 +1,15 @@
 package ru.ifmo.pga.software.design.todo.list
 
 import org.hibernate.SessionFactory
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.context.ApplicationContext
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.env.Environment
 import org.springframework.jdbc.datasource.DriverManagerDataSource
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean
 import org.springframework.transaction.annotation.EnableTransactionManagement
-import ru.ifmo.pga.software.design.todo.list.entity.Task
-import ru.ifmo.pga.software.design.todo.list.entity.TaskList
-import ru.ifmo.pga.software.design.todo.list.entity.enums.Status
-import ru.ifmo.pga.software.design.todo.list.service.TaskListService
-import ru.ifmo.pga.software.design.todo.list.service.TaskService
 import java.util.*
 import javax.sql.DataSource
 

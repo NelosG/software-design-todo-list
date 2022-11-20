@@ -9,5 +9,8 @@ import ru.ifmo.pga.software.design.todo.list.entity.enums.Status
  */
 interface TaskService : NameDescriptionService<Task> {
     fun findByTaskListId(id: Long): List<Task>
+
     fun findByTaskListIdAndStatus(id: Long, status: Status): List<Task>
+
+    fun findNotDoneTasksByListId(id: Long): List<Task>
 }

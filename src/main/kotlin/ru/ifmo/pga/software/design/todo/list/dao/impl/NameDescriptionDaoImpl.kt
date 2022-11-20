@@ -23,6 +23,10 @@ abstract class NameDescriptionDaoImpl<T : NameDescriptionEntity> : GenericDaoImp
                         root.get<String>(NameDescriptionEntity.NAME),
                         name
                     )
+                ).orderBy(
+                    cb.asc(
+                        root.get<String>(NameDescriptionEntity.NAME)
+                    )
                 )
         )
         return query.resultList

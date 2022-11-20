@@ -3,15 +3,9 @@ package ru.ifmo.pga.software.design.todo.list.web
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.SessionAttribute
+import org.springframework.web.bind.annotation.*
 import ru.ifmo.pga.software.design.todo.list.entity.Task
-import ru.ifmo.pga.software.design.todo.list.entity.TaskList
 import ru.ifmo.pga.software.design.todo.list.entity.enums.Status
-import ru.ifmo.pga.software.design.todo.list.service.TaskListService
 import ru.ifmo.pga.software.design.todo.list.service.TaskService
 import javax.servlet.http.HttpSession
 
@@ -28,7 +22,6 @@ class TaskController @Autowired constructor(
         model.addAttribute("tasks", taskService.findByTaskListId(id))
         model.addAttribute("newTask", Task())
         model.addAttribute("TO_DO", Status.TO_DO)
-        model.addAttribute("DONE", Status.DONE)
         session.setAttribute("taskListId", id)
         return "tasks"
     }
@@ -38,7 +31,7 @@ class TaskController @Autowired constructor(
         @SessionAttribute(name = "taskListId", required = true) taskListId: Long,
         @ModelAttribute("newTask") newTask: Task
     ): String {
-        taskService.save(newTask.apply {  this.taskListId = taskListId})
+        taskService.save(newTask.apply { this.taskListId = taskListId })
         return "redirect:/list?id=${newTask.taskListId}"
     }
 
@@ -52,23 +45,19 @@ class TaskController @Autowired constructor(
         return "redirect:/list?id=${task.taskListId}"
     }
 
-    @RequestMapping(value = ["/list/mark-done"], method = [RequestMethod.GET])
-    fun markTaskDone(
+    @RequestMapping(value = ["/list/change-status"], method = [RequestMethod.GET])
+    fun changeTaskStatus(
         @RequestParam(name = "id", required = true) id: Long,
         model: Model
     ): String {
         val task = taskService.findById(id) ?: error("Task wasn't found")
-        taskService.save(task.apply { status = Status.DONE });
-        return "redirect:/list?id=${task.taskListId}"
-    }
-
-    @RequestMapping(value = ["/list/mark-undone"], method = [RequestMethod.GET])
-    fun markTaskUnDone(
-        @RequestParam(name = "id", required = true) id: Long,
-        model: Model
-    ): String {
-        val task = taskService.findById(id) ?: error("Task wasn't found")
-        taskService.save(task.apply { status = Status.TO_DO });
+        taskService.save(
+            task.apply {
+                status = when (task.status) {
+                    Status.TO_DO -> Status.DONE
+                    Status.DONE -> Status.TO_DO
+                }
+            })
         return "redirect:/list?id=${task.taskListId}"
     }
 }

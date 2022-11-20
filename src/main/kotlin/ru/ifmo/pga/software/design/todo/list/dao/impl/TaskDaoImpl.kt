@@ -2,6 +2,7 @@ package ru.ifmo.pga.software.design.todo.list.dao.impl
 
 import org.springframework.stereotype.Repository
 import ru.ifmo.pga.software.design.todo.list.dao.TaskDao
+import ru.ifmo.pga.software.design.todo.list.entity.NameDescriptionEntity
 import ru.ifmo.pga.software.design.todo.list.entity.Task
 import ru.ifmo.pga.software.design.todo.list.entity.enums.Status
 
@@ -22,6 +23,10 @@ open class TaskDaoImpl : NameDescriptionDaoImpl<Task>(), TaskDao {
                     cb.equal(
                         root.get<Long>(Task.TASK_LIST_ID),
                         id
+                    )
+                ).orderBy(
+                    cb.asc(
+                        root.get<String>(NameDescriptionEntity.NAME)
                     )
                 )
         )
@@ -44,6 +49,10 @@ open class TaskDaoImpl : NameDescriptionDaoImpl<Task>(), TaskDao {
                             root.get<Long>(Task.STATUS),
                             status
                         )
+                    )
+                ).orderBy(
+                    cb.asc(
+                        root.get<String>(NameDescriptionEntity.NAME)
                     )
                 )
         )

@@ -1,5 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <head>
     <title>Tasks</title>
 </head>
@@ -8,19 +8,19 @@
 <a th:href="@{/lists}"> All Lists </a>
 
 <h3>Add Task</h3>
-<form th:object="${newTask}" method="POST" action="/list/add-task">
+<form action="/list/add-task" method="POST" th:object="${newTask}">
     <table>
         <tr>
             <td><label>Name:</label></td>
             <td><label>
-                <input type="text" th:field="*{name}"/>
+                <input th:field="*{name}" type="text"/>
             </label></td>
         </tr>
 
         <tr>
             <td><label>Description:</label></td>
             <td><label>
-                <input type="text" th:field="*{description}"/>
+                <input th:field="*{description}" type="text"/>
             </label></td>
         </tr>
     </table>
@@ -34,7 +34,6 @@
         <th>Name</th>
         <th>Status</th>
         <th>Description</th>
-        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -45,9 +44,16 @@
         <td><span th:text="${task.getName()}"> Name </span></td>
         <td><span th:text="${task.getStatus()}"> Status </span></td>
         <td><span th:text="${task.getDescription()}"> Description </span></td>
-        <td><a th:href="@{/list/delete(id=${task.getId()})}"> Delete </a></td>
-        <td><a th:if="${task.getStatus() == TO_DO}" th:href="@{/list/mark-done(id=${task.getId()})}"> Done </a></td>
-        <td><a th:if="${task.getStatus() == DONE}" th:href="@{/list/mark-undone(id=${task.getId()})}"> UnDone </a></td>
+        <td>
+            <a th:href="@{/list/delete(id=${task.getId()})}">
+                <button type="submit">Remove</button>
+            </a>
+        </td>
+        <td><a th:href="@{/list/change-status(id=${task.getId()})}" th:switch="${task.getStatus() == TO_DO}">
+            <button th:case="true">Done</button>
+            <button th:case="false">UnDone</button>
+        </a>
+        </td>
     </tr>
     </tbody>
 </table>
