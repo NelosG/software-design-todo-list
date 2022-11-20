@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+    <title>Task Lists</title>
+</head>
+<body>
+
+<h3>Add Task List</h3>
+<form th:object="${newTaskList}" method="POST" action="/lists/add-task-list">
+    <table>
+        <tr>
+            <td><label>Name:</label></td>
+            <td><label>
+                <input type="text" th:field="*{name}"/>
+            </label></td>
+        </tr>
+
+        <tr>
+            <td><label>Description:</label></td>
+            <td><label>
+                <input type="text" th:field="*{description}"/>
+            </label></td>
+        </tr>
+    </table>
+    <input type="submit" value="add">
+</form>
+
+<h3>Tasks</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>TO_DO</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${taskLists.isEmpty()}">
+        <td colspan="4">No Task Lists</td>
+    </tr>
+    <tr th:each="taskList : ${taskLists}">
+        <td><a th:text="${taskList.getName()}" th:href="@{/list(id=${taskList.getId()})}"> Name </a></td>
+        <td><span th:text="${taskList.getDescription()}"> Description </span></td>
+        <td><a th:text="${@taskListService.findCountNotDoneTasks(taskList.getId())}"> TO_DO </a></td>
+        <td><a th:href="@{/lists/delete(id=${taskList.getId()})}"> Delete </a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
