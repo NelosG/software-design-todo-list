@@ -13,4 +13,6 @@ interface TaskService : NameDescriptionService<Task> {
     fun findByTaskListIdAndStatus(id: Long, status: Status): List<Task>
 
     fun findNotDoneTasksByListId(id: Long): List<Task>
+
+    fun findDoneTasksByListId(id: Long): List<Task>
 }

@@ -29,4 +29,9 @@ open class TaskServiceImpl : NameDescriptionServiceImpl<Task, TaskDao>(), TaskSe
     override fun findNotDoneTasksByListId(id: Long): List<Task> {
         return findByTaskListIdAndStatus(id, Status.TO_DO)
     }
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    override fun findDoneTasksByListId(id: Long): List<Task> {
+        return findByTaskListIdAndStatus(id, Status.DONE)
+    }
 }

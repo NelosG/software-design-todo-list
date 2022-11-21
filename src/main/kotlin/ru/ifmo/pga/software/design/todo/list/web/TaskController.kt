@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*
 import ru.ifmo.pga.software.design.todo.list.entity.Task
 import ru.ifmo.pga.software.design.todo.list.entity.enums.Status
 import ru.ifmo.pga.software.design.todo.list.service.TaskService
-import javax.servlet.http.HttpSession
 
 @Controller
 class TaskController @Autowired constructor(
@@ -16,26 +15,29 @@ class TaskController @Autowired constructor(
     @RequestMapping(value = ["/list"], method = [RequestMethod.GET])
     fun getList(
         @RequestParam(name = "id", required = true) id: Long,
-        model: Model,
-        session: HttpSession
+        model: Model
     ): String {
         model.addAttribute("tasks", taskService.findByTaskListId(id))
-        model.addAttribute("newTask", Task())
         model.addAttribute("TO_DO", Status.TO_DO)
-        session.setAttribute("taskListId", id)
+        model.addAttribute("DONE", Status.DONE)
         return "tasks"
     }
 
     @RequestMapping(value = ["/list/add-task"], method = [RequestMethod.POST])
     fun addTask(
-        @SessionAttribute(name = "taskListId", required = true) taskListId: Long,
-        @ModelAttribute("newTask") newTask: Task
-    ): String {
-        taskService.save(newTask.apply { this.taskListId = taskListId })
-        return "redirect:/list?id=${newTask.taskListId}"
+        @RequestParam(name = "taskListId", required = true) taskListId: Long,
+        @RequestParam(name = "name", required = true, defaultValue = "Some Task") name: String,
+        @RequestParam(name = "description", required = false) description: String?,
+        ): String {
+        taskService.save(Task().apply {
+            this.taskListId = taskListId
+            this.name = name
+            this.description = description
+        })
+        return "redirect:/list?id=${taskListId}"
     }
 
-    @RequestMapping(value = ["/list/delete"], method = [RequestMethod.GET])
+    @RequestMapping(value = ["/list/delete"], method = [RequestMethod.POST])
     fun deleteTask(
         @RequestParam(name = "id", required = true) id: Long,
         model: Model
@@ -45,7 +47,7 @@ class TaskController @Autowired constructor(
         return "redirect:/list?id=${task.taskListId}"
     }
 
-    @RequestMapping(value = ["/list/change-status"], method = [RequestMethod.GET])
+    @RequestMapping(value = ["/list/change-status"], method = [RequestMethod.POST])
     fun changeTaskStatus(
         @RequestParam(name = "id", required = true) id: Long,
         model: Model

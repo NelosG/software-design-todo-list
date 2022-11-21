@@ -2,29 +2,20 @@
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <head>
     <title>Tasks</title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/5.2.2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
 <body>
 
-<a th:href="@{/lists}"> All Lists </a>
+<a th:href="@{/lists}" class="breadcrumb"> All Lists </a>
 
-<h3>Add Task</h3>
-<form action="/list/add-task" method="POST" th:object="${newTask}">
-    <table>
-        <tr>
-            <td><label>Name:</label></td>
-            <td><label>
-                <input th:field="*{name}" type="text"/>
-            </label></td>
-        </tr>
-
-        <tr>
-            <td><label>Description:</label></td>
-            <td><label>
-                <input th:field="*{description}" type="text"/>
-            </label></td>
-        </tr>
-    </table>
-    <input type="submit" value="add">
+<h4>Add Task</h4>
+<form th:action="@{/list/add-task}" method="POST" class="form">
+    <input name="taskListId" th:value="${param.id}" type="hidden"/>
+    <label> Name <input name="name" th:value="null"/></label>
+    <label> Description <input name="description"></label>
+    <input type="submit" value="Add" class="form-btn"/>
 </form>
 
 <h3>Tasks</h3>
@@ -41,18 +32,21 @@
         <td colspan="4">No Tasks</td>
     </tr>
     <tr th:each="task : ${tasks}">
-        <td><span th:text="${task.getName()}"> Name </span></td>
-        <td><span th:text="${task.getStatus()}"> Status </span></td>
-        <td><span th:text="${task.getDescription()}"> Description </span></td>
-        <td>
-            <a th:href="@{/list/delete(id=${task.getId()})}">
-                <button type="submit">Remove</button>
-            </a>
+        <td class="td-name"><span th:text="${task.getName()}" class="name"> Name </span></td>
+        <td class="td-status"><span th:text="${task.getStatus()}" class="status"> Status </span></td>
+        <td class="td-description"><span th:text="${task.getDescription()}" class="description"> Description </span></td>
+        <td class="td-form">
+            <form th:action="@{/list/delete}" method="POST" class="form">
+                <input name="id" th:value="${task.getId()}" type="hidden"/>
+                <input type="submit" value="Delete"/>
+            </form>
         </td>
-        <td><a th:href="@{/list/change-status(id=${task.getId()})}" th:switch="${task.getStatus() == TO_DO}">
-            <button th:case="true">Done</button>
-            <button th:case="false">UnDone</button>
-        </a>
+        <td class="td-form">
+            <form th:action="@{/list/change-status}" method="POST" class="form">
+                <input name="id" th:value="${task.getId()}" type="hidden"/>
+                <input th:if="${task.getStatus() == TO_DO}" type="submit" value="Done" class="td-form-btn"/>
+                <input th:if="${task.getStatus() == DONE}" type="submit" value="UnDone" class="td-form-btn"/>
+            </form>
         </td>
     </tr>
     </tbody>

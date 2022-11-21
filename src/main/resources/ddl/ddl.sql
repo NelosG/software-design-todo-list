@@ -2,7 +2,7 @@ CREATE TABLE task_list
 (
     id          bigint       NOT NULL PRIMARY KEY,
     name        varchar(300) NOT NULL,
-    description varchar(1000)
+    description varchar(3000)
 );
 
 CREATE TABLE task
@@ -11,7 +11,7 @@ CREATE TABLE task
     task_list_id bigint REFERENCES task_list (id) NOT NULL,
     status       char(1)                          NOT NULL,
     name         varchar(300)                     NOT NULL,
-    description  varchar(1000)
+    description  varchar(3000)
 );
 
 

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
+import ru.ifmo.pga.software.design.todo.list.entity.Task
 import ru.ifmo.pga.software.design.todo.list.entity.TaskList
 import ru.ifmo.pga.software.design.todo.list.service.TaskListService
 
@@ -23,12 +24,18 @@ class TaskListController @Autowired constructor(
     }
 
     @RequestMapping(value = ["/lists/add-task-list"], method = [RequestMethod.POST])
-    fun addList(@ModelAttribute("newTaskList") newTaskList: TaskList): String {
-        taskListService.save(newTaskList)
+    fun addList(
+        @RequestParam(name = "name", required = true, defaultValue = "Some Task List") name: String,
+        @RequestParam(name = "description", required = false) description: String?,
+    ): String {
+        taskListService.save(TaskList().apply {
+            this.name = name
+            this.description = description
+        })
         return "redirect:/lists"
     }
 
-    @RequestMapping(value = ["/lists/delete"], method = [RequestMethod.GET])
+    @RequestMapping(value = ["/lists/delete"], method = [RequestMethod.POST])
     fun deleteList(
         @RequestParam(name = "id", required = true) id: Long,
         model: Model
