@@ -13,6 +13,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement
 import java.util.*
 import javax.sql.DataSource
 
+/**
+ * @author Gleb Pushkarev
+ * @since 1.0.0
+ */
 @SpringBootApplication
 @Configuration
 @EnableTransactionManagement

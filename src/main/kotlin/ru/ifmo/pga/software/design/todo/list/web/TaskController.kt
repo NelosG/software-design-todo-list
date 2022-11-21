@@ -8,6 +8,10 @@ import ru.ifmo.pga.software.design.todo.list.entity.Task
 import ru.ifmo.pga.software.design.todo.list.entity.enums.Status
 import ru.ifmo.pga.software.design.todo.list.service.TaskService
 
+/**
+ * @author Gleb Pushkarev
+ * @since 1.0.0
+ */
 @Controller
 class TaskController @Autowired constructor(
     private val taskService: TaskService,

@@ -11,6 +11,10 @@ import ru.ifmo.pga.software.design.todo.list.entity.Task
 import ru.ifmo.pga.software.design.todo.list.entity.TaskList
 import ru.ifmo.pga.software.design.todo.list.service.TaskListService
 
+/**
+ * @author Gleb Pushkarev
+ * @since 1.0.0
+ */
 @Controller
 class TaskListController @Autowired constructor(
     private val taskListService: TaskListService,
