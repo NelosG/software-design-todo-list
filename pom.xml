@@ -4,36 +4,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ru.ifmo.pga.software.design</groupId>
+    <parent>
+        <groupId>ru.ifmo.pga.software.design</groupId>
+        <artifactId>core</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
     <artifactId>todo.list</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Todo List</name>
 
     <properties>
-        <kotlin.code.style>official</kotlin.code.style>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <kotlin.compiler.jvmTarget>17</kotlin.compiler.jvmTarget>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-
-        <kotlin.version>1.7.21</kotlin.version>
-        <hibernate-entitymanager.version>5.6.14.Final</hibernate-entitymanager.version>
-        <postgresql.version>42.5.0</postgresql.version>
-        <javax.persistence-api.version>2.2</javax.persistence-api.version>
-        <spring-boot.version>2.7.5</spring-boot.version>
-        <spring-orm.version>5.3.23</spring-orm.version>
-        <spring-tx.version>6.0.0</spring-tx.version>
-        <bootstrap.version>5.2.2</bootstrap.version>
 
         <!-- PLUGINS -->
         <maven-assembly-plugin.version>3.4.2</maven-assembly-plugin.version>
-
-        <!-- TESTS -->
-        <junit-jupiter-engine.version>5.9.1</junit-jupiter-engine.version>
-        <mockito.version>4.8.0</mockito.version>
 
         <!-- MAIN CLASS -->
         <main.class>ru.ifmo.pga.software.design.todo.list.ApplicationKt</main.class>
@@ -102,86 +87,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.0</version>
+                <version>${maven-surefire-plugin.version}</version>
             </plugin>
 
         </plugins>
     </build>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib -->
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib</artifactId>
-            <version>${kotlin.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>${hibernate-entitymanager.version}</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>javax.persistence-api</artifactId>
-            <version>${javax.persistence-api.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgresql.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- SPRING -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring-boot.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-            <version>${spring-boot.version}</version>
-        </dependency>
-
-        <!-- hot swapping, disable cache for template, enable live reload -->
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <version>${spring-boot.version}</version>
-            <optional>true</optional>
-        </dependency>
-
-
-        <!-- Optional, for bootstrap -->
-        <!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>bootstrap</artifactId>
-            <version>${bootstrap.version}</version>
-        </dependency>
-
-
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${spring-orm.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${spring-tx.version}</version>
-        </dependency>
-
-
         <!-- PLUGINS -->
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-assembly-plugin -->
         <dependency>
@@ -189,48 +101,11 @@
             <artifactId>maven-assembly-plugin</artifactId>
             <version>${maven-assembly-plugin.version}</version>
         </dependency>
-
-        <!-- TESTS -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <version>${spring-boot.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test-junit5</artifactId>
-            <version>${kotlin.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit-jupiter-engine.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-inline -->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-inline</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
+            <groupId>ru.ifmo.pga.software.design</groupId>
+            <artifactId>core</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
