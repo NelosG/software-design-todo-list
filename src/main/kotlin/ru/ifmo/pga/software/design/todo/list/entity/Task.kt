@@ -1,7 +1,8 @@
 package ru.ifmo.pga.software.design.todo.list.entity
 
+import jakarta.persistence.*
+import ru.ifmo.pga.software.design.core.entity.NameDescriptionEntity
 import ru.ifmo.pga.software.design.todo.list.entity.enums.Status
-import javax.persistence.*
 
 /**
  * @author Gleb Pushkarev

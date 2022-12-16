@@ -1,6 +1,8 @@
 package ru.ifmo.pga.software.design.todo.list.entity.enums
 
-import javax.persistence.Converter
+import jakarta.persistence.Converter
+import ru.ifmo.pga.software.design.core.entity.enums.JpaEnum
+import ru.ifmo.pga.software.design.core.entity.enums.JpaEnumConverter
 
 /**
  * @author Gleb Pushkarev

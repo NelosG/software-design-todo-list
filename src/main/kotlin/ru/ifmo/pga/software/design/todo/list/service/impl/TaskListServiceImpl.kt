@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Propagation
 import org.springframework.transaction.annotation.Transactional
+import ru.ifmo.pga.software.design.core.service.impl.NameDescriptionServiceImpl
 import ru.ifmo.pga.software.design.todo.list.dao.TaskListDao
 import ru.ifmo.pga.software.design.todo.list.entity.TaskList
 import ru.ifmo.pga.software.design.todo.list.service.TaskListService

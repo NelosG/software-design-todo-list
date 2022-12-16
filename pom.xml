@@ -10,12 +10,13 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>todo.list</artifactId>
+    <artifactId>software-design-todo-list</artifactId>
     <packaging>jar</packaging>
 
-    <name>Todo List</name>
+    <name>Software Design Todo List</name>
 
     <properties>
+        <bootstrap.version>5.2.3</bootstrap.version>
 
         <!-- PLUGINS -->
         <maven-assembly-plugin.version>3.4.2</maven-assembly-plugin.version>
@@ -101,18 +102,41 @@
             <artifactId>maven-assembly-plugin</artifactId>
             <version>${maven-assembly-plugin.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+		        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+
+        <!-- hot swapping, disable cache for template, enable live reload -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <version>${spring-boot.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+
+        <!-- Optional, for bootstrap -->
+        <!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>${bootstrap.version}</version>
+        </dependency>
+		
         <dependency>
             <groupId>ru.ifmo.pga.software.design</groupId>
-            <artifactId>core</artifactId>
+            <artifactId>core-commons</artifactId>
             <version>1.0.0-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>mavenCentral</id>
-            <url>https://repo1.maven.org/maven2/</url>
-        </repository>
-    </repositories>
 </project>

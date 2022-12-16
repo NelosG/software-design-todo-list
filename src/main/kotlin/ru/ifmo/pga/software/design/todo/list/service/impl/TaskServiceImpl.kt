@@ -3,6 +3,7 @@ package ru.ifmo.pga.software.design.todo.list.service.impl
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Propagation
 import org.springframework.transaction.annotation.Transactional
+import ru.ifmo.pga.software.design.core.service.impl.NameDescriptionServiceImpl
 import ru.ifmo.pga.software.design.todo.list.dao.TaskDao
 import ru.ifmo.pga.software.design.todo.list.entity.Task
 import ru.ifmo.pga.software.design.todo.list.entity.enums.Status

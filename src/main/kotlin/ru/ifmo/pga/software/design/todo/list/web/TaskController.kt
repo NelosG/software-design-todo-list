@@ -3,7 +3,9 @@ package ru.ifmo.pga.software.design.todo.list.web
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestMethod
+import org.springframework.web.bind.annotation.RequestParam
 import ru.ifmo.pga.software.design.todo.list.entity.Task
 import ru.ifmo.pga.software.design.todo.list.entity.enums.Status
 import ru.ifmo.pga.software.design.todo.list.service.TaskService
@@ -32,7 +34,7 @@ class TaskController @Autowired constructor(
         @RequestParam(name = "taskListId", required = true) taskListId: Long,
         @RequestParam(name = "name", required = true, defaultValue = "Some Task") name: String,
         @RequestParam(name = "description", required = false) description: String?,
-        ): String {
+    ): String {
         taskService.save(Task().apply {
             this.taskListId = taskListId
             this.name = name

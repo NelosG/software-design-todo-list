@@ -1,8 +1,9 @@
 package ru.ifmo.pga.software.design.todo.list.dao.impl
 
 import org.springframework.stereotype.Repository
+import ru.ifmo.pga.software.design.core.dao.impl.NameDescriptionDaoImpl
+import ru.ifmo.pga.software.design.core.entity.NameDescriptionEntity
 import ru.ifmo.pga.software.design.todo.list.dao.TaskDao
-import ru.ifmo.pga.software.design.todo.list.entity.NameDescriptionEntity
 import ru.ifmo.pga.software.design.todo.list.entity.Task
 import ru.ifmo.pga.software.design.todo.list.entity.enums.Status
 
